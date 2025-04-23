@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gauss-Jordan</title>
+    <link rel="stylesheet" href="../static/style_gauss_jordan.css">
+</head>
+<body>
+    <header>
+    <h1>Método de Gauss-Jordan</h1>
+    <a href="{{ url_for('index') }}" class="btn_atras">Atrás</a>
+    </header>
+    <div class="container">
+    {% if not cantidad %}
+    
+    <!-- Fase 1: Pedir cantidad de ecuaciones -->
+    
+    <form method="post" class="formulario">
+        <label for="cantidad" class="label">¿Cuántas ecuaciones tiene el sistema?</label>
+        <input type="number" id="cantidad" name="cantidad" required min="1" class="input">
+        <button type="submit" class="btn_submit">Continuar</button>
+    </form>
+
+    {% else %}
+    <!-- Fase 2: Pedir las ecuaciones -->
+    <form method="post" class="formulario">
+        <input type="hidden" name="cantidad" value="{{ cantidad }}">
+        
+        {% for i in range(cantidad) %}
+            <label for="ecuacion{{ i }}" class="label">Ecuación {{ i + 1 }}:</label>
+            <input type="text" id="ecuacion{{ i }}" name="ecuacion{{ i }}" required placeholder="Ej: 2x+3y=5" class="input">
+            <br><br>
+        {% endfor %}
+
+        <button type="submit" class="btn_submit">Resolver</button>
+        
+    {% endif %}
+
+    {% if soluciones %}
+    <!-- Fase 3: Mostrar soluciones -->
+    <h2 class="h2_jinja">Soluciones:</h2>
+    <ul>
+        {% for sol in soluciones %}
+    <li class="numeros">Variable {{ loop.index }} = {{ sol }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    </form>
+    </div>
+</body>
+</html>
