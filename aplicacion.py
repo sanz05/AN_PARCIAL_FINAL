@@ -440,8 +440,6 @@ if __name__ == '__main__':
 
 
 
-
-
 """
 # Crear rango de x centrado en la raíz
 x_vals = np.linspace(punto - 5, punto + 5, 400)
